@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../css/Header.css'
+import '../css/Header.css';
 import { CiShoppingBasket } from "react-icons/ci";
 import { CiLight } from "react-icons/ci";
 import { FaMoon } from "react-icons/fa";
