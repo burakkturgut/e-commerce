@@ -8,13 +8,10 @@ function ProductList() {
 
     const dispatch = useDispatch();
     const { product } = useSelector((store) => store.product);
-    console.log(product);
+
     useEffect(() => {
         dispatch(getAllProducts())
     }, [])
-
-
-
     return (
         <div className='flex-row' style={{ flexWrap: 'wrap', marginTop: '25px' }} >
             {

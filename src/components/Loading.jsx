@@ -13,7 +13,6 @@ function Loading() {
             open={loading}
         >
             <CircularProgress color="inherit" />
-
         </Backdrop>
     )
 }

@@ -4,28 +4,46 @@ import { useParams } from 'react-router-dom'
 import { setSelectedProduct } from '../redux/slicees/productSlice';
 import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
+import { addToBasket, calculateBasket } from '../redux/slicees/basketSlice';
+
 
 
 function ProductDetails() {
-
     const { id } = useParams();
     const { product, selectedProduct } = useSelector((store) => store.product)
+
     const { price, image, title, description } = selectedProduct;
 
     const [count, setCount] = useState(0);
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        getProductById();
-    }, [])
-
     const increment = () => {
         setCount(count + 1);
     }
+
     const decrement = () => {
         setCount(count - 1);
     }
+
+    const addBasket = () => {
+        const payload = {
+            id,
+            price,
+            image,
+            title,
+            description,
+            count
+        }
+
+        dispatch(addToBasket(payload));
+        dispatch(calculateBasket());
+    }
+
+
+    useEffect(() => {
+        getProductById();
+    }, [])
 
     const getProductById = () => {
         product && product.map((product) => {
@@ -48,7 +66,9 @@ function ProductDetails() {
                     <CiCirclePlus onClick={increment} style={{ fontSize: '40px', marginRight: '5px ' }} /><span style={{ fontSize: '35px' }}>{count}</span><CiCircleMinus onClick={decrement} style={{ fontSize: '40px', marginLeft: '5px ' }} />
                 </div>
                 <div>
-                    <button style={{ marginTop: '25px', border: 'none', padding: '10px', backgroundColor: 'lightblue', borderRadius: '5px', color: '#fff' }}>Sepete Ekle</button>
+                    <button
+                        onClick={addBasket}
+                        style={{ marginTop: '25px', border: 'none', padding: '10px', backgroundColor: 'lightblue', borderRadius: '5px', color: '#fff' }}>Sepete Ekle</button>
                 </div>
             </div>
 
